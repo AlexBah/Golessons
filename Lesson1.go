@@ -1,3 +1,4 @@
+// display arguments of command line
 package main
 
 import (
