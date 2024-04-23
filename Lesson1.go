@@ -1,32 +1,24 @@
-// display arguments of command line
+// display text of every string, which appear in
+//standart input more one time, and number of it
+//appearences
+
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
-	"strconv"
-	"strings"
-	"time"
 )
 
 func main() {
-	start := time.Now()
-	s, sep := "", ""
-	for i := 0; i < len(os.Args); i++ {
-		s += sep + os.Args[i]
-		sep = " "
+	counts := make(map[string]int)
+	input := bufio.NewScanner(os.Stdin)
+	for input.Scan() {
+		counts[input.Text()]++
 	}
-	fmt.Println(s)
-	fmt.Printf("%.3fs elapsed\n", time.Since(start).Seconds())
-
-	start = time.Now()
-	for i, arg := range os.Args[0:] {
-		s = strconv.Itoa(i) + " " + arg
-		fmt.Println(s)
+	for line, n := range counts {
+		if n > 1 {
+			fmt.Printf("%d\t%s\n", n, line)
+		}
 	}
-	fmt.Printf("%.3fs elapsed\n", time.Since(start).Seconds())
-
-	start = time.Now()
-	fmt.Println(strings.Join(os.Args[0:], " "))
-	fmt.Printf("%.3fs elapsed\n", time.Since(start).Seconds())
 }
