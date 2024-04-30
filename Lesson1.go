@@ -27,11 +27,6 @@ func main() {
 		if n > 1 {
 			fmt.Printf("%d\t%s\n", n, line)
 			fmt.Printf("%s\n", stringInFile[line])
-			//			for line2, line3 := range stringInFile {
-			//				if line == line3 {
-			//					fmt.Printf("%s\t%s\n", line, line2)
-			//				}
-			//			}
 			fmt.Printf("----------------\n")
 		}
 	}
