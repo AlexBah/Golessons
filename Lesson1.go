@@ -15,10 +15,12 @@ func main() {
 	for _, url := range os.Args[1:] {
 		go fetch(url, ch)
 	}
+	gf, _ := os.Create("out.log")
 	for range os.Args[1:] {
-		fmt.Println(<-ch)
+		fmt.Fprintln(gf, <-ch)
 	}
-	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
+	fmt.Fprintf(gf, "%.2fs elapsed\n", time.Since(start).Seconds())
+	gf.Close()
 }
 
 func fetch(url string, ch chan<- string) {
